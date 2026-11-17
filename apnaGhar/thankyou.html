@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - ExpoSphere & Apna Ghar</title>
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #212529;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      /* Card Container */
+      .thank-you-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        padding: 40px 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+
+      /* Success Icon / Accent */
+      .icon-wrapper {
+        width: 64px;
+        height: 64px;
+        background-color: #e6f4ea;
+        color: #137333;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px auto;
+        font-size: 32px;
+      }
+
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #5f6368;
+        margin-bottom: 30px;
+      }
+
+      /* Responsive Button Link */
+      .btn-back {
+        display: inline-block;
+        background-color: #1a73e8;
+        color: #ffffff;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 6px;
+        transition:
+          background-color 0.2s ease,
+          transform 0.1s ease;
+      }
+
+      .btn-back:hover {
+        background-color: #1557b0;
+      }
+
+      .btn-back:active {
+        transform: scale(0.98);
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 480px) {
+        .thank-you-card {
+          padding: 30px 16px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thank-you-card">
+      <div class="icon-wrapper">&#10003;</div>
+      <h1>Thank You!</h1>
+      <p>We've received your submission and will be in touch shortly.</p>
+      <!-- Fixed link path to match folder casing -->
+      <a href="/apnaGhar/" class="btn-back">Back to Apna Ghar</a>
+    </div>
+  </body>
+</html>
