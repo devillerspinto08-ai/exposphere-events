@@ -729,6 +729,23 @@
       .reveal-delay-4 {
         transition-delay: 0.4s;
       }
+      .error-msg {
+        display: block;
+        min-height: 18px;
+        margin-top: 4px;
+        font-size: 12px;
+        color: #e53935;
+      }
+      .form-input.is-invalid {
+        border-color: #e53935 !important;
+      }
+      .form-input.is-valid {
+        border-color: #2e7d32 !important;
+      }
+      .form-submit-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -1140,14 +1157,15 @@
             </p>
 
             <form
+              class="validate-form"
               name="apnaghar-visitor"
               method="POST"
-              action="thank-you.html"
+              action="/thankyou.html"
               data-netlify="true"
               netlify-honeypot="bot-field"
+              novalidate
             >
               <input type="hidden" name="form-name" value="apnaghar-visitor" />
-              <!-- CUSTOM EMAIL SUBJECT & CONTEXT FOR GMAIL -->
               <input
                 type="hidden"
                 name="subject"
@@ -1163,36 +1181,57 @@
               </p>
 
               <div class="form-group">
-                <label class="form-label">Full Name</label>
+                <label class="form-label" for="v-name">Full Name</label>
                 <input
                   type="text"
+                  id="v-name"
                   name="name"
                   class="form-input"
                   placeholder="Your full name"
                   required
+                  minlength="2"
+                  maxlength="80"
+                  pattern=".*\S.*"
+                  data-label="your full name"
+                  autocomplete="name"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Email Address</label>
+                <label class="form-label" for="v-email">Email Address</label>
                 <input
                   type="email"
+                  id="v-email"
                   name="email"
                   class="form-input"
                   placeholder="name@email.com"
                   required
+                  maxlength="100"
+                  pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}"
+                  data-label="your email"
+                  data-msg="Please enter a valid email, like name@example.com"
+                  autocomplete="email"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Phone Number</label>
+                <label class="form-label" for="v-phone">Phone Number</label>
                 <input
                   type="tel"
+                  id="v-phone"
                   name="phone"
                   class="form-input"
                   placeholder="+91 XXXXX XXXXX"
                   required
+                  maxlength="15"
+                  pattern="(\+91[\s\-]?)?[6-9][0-9]{9}"
+                  data-label="your phone number"
+                  data-msg="Please enter a valid 10-digit mobile number"
+                  autocomplete="tel"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <button type="submit" class="form-submit-btn">
@@ -1211,18 +1250,19 @@
             </p>
 
             <form
+              class="validate-form"
               name="apnaghar-exhibitor"
               method="POST"
-              action="thankyou.html"
+              action="/thankyou.html"
               data-netlify="true"
               netlify-honeypot="bot-field"
+              novalidate
             >
               <input
                 type="hidden"
                 name="form-name"
                 value="apnaghar-exhibitor"
               />
-              <!-- CUSTOM EMAIL SUBJECT & CONTEXT FOR GMAIL -->
               <input
                 type="hidden"
                 name="subject"
@@ -1238,47 +1278,77 @@
               </p>
 
               <div class="form-group">
-                <label class="form-label">Company / Developer Name</label>
+                <label class="form-label" for="e-company"
+                  >Company / Developer Name</label
+                >
                 <input
                   type="text"
+                  id="e-company"
                   name="company"
                   class="form-input"
                   placeholder="Organization name"
                   required
+                  minlength="2"
+                  maxlength="100"
+                  pattern=".*\S.*"
+                  data-label="your company name"
+                  autocomplete="organization"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Contact Person</label>
+                <label class="form-label" for="e-person">Contact Person</label>
                 <input
                   type="text"
+                  id="e-person"
                   name="contact_person"
                   class="form-input"
                   placeholder="Representative name"
                   required
+                  minlength="2"
+                  maxlength="80"
+                  pattern=".*\S.*"
+                  data-label="the contact person's name"
+                  autocomplete="name"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Corporate Email</label>
+                <label class="form-label" for="e-email">Corporate Email</label>
                 <input
                   type="email"
+                  id="e-email"
                   name="email"
                   class="form-input"
                   placeholder="corporate@company.com"
                   required
+                  maxlength="100"
+                  pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}"
+                  data-label="your email"
+                  data-msg="Please enter a valid email, like name@company.com"
+                  autocomplete="email"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Contact Number</label>
+                <label class="form-label" for="e-phone">Contact Number</label>
                 <input
                   type="tel"
+                  id="e-phone"
                   name="phone"
                   class="form-input"
                   placeholder="+91 XXXXX XXXXX"
                   required
+                  maxlength="15"
+                  pattern="(\+91[\s\-]?)?[6-9][0-9]{9}"
+                  data-label="your contact number"
+                  data-msg="Please enter a valid 10-digit mobile number"
+                  autocomplete="tel"
                 />
+                <small class="error-msg" aria-live="polite"></small>
               </div>
 
               <button type="submit" class="form-submit-btn">
@@ -1359,6 +1429,102 @@
       window.addEventListener("scroll", triggerReveal, { passive: true });
       window.addEventListener("DOMContentLoaded", triggerReveal);
       window.addEventListener("load", triggerReveal);
+
+      (function () {
+        function getMessage(field) {
+          const v = field.validity;
+          const label = field.dataset.label || "this field";
+
+          if (v.valueMissing) {
+            return "Please enter " + label;
+          }
+          if (v.tooShort) {
+            return "Please enter at least " + field.minLength + " characters";
+          }
+          if (v.tooLong) {
+            return "Maximum " + field.maxLength + " characters allowed";
+          }
+          if (v.typeMismatch || v.patternMismatch) {
+            return field.dataset.msg || "Please enter " + label;
+          }
+          return "";
+        }
+
+        function validateField(field) {
+          const errorEl = field
+            .closest(".form-group")
+            .querySelector(".error-msg");
+          const emptyOptional = field.value.trim() === "" && !field.required;
+
+          if (emptyOptional) {
+            errorEl.textContent = "";
+            field.classList.remove("is-invalid", "is-valid");
+            return true;
+          }
+
+          if (field.checkValidity()) {
+            errorEl.textContent = "";
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid");
+            return true;
+          }
+
+          errorEl.textContent = getMessage(field);
+          field.classList.remove("is-valid");
+          field.classList.add("is-invalid");
+          return false;
+        }
+
+        document
+          .querySelectorAll("form.validate-form")
+          .forEach(function (form) {
+            const fields = form.querySelectorAll(".form-input");
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            fields.forEach(function (field) {
+              field.addEventListener("blur", function () {
+                field.dataset.touched = "true";
+                validateField(field);
+              });
+
+              // Live validation while typing
+              field.addEventListener("input", function () {
+                if (
+                  field.dataset.touched === "true" ||
+                  field.value.length > 0
+                ) {
+                  validateField(field);
+                }
+              });
+
+              field.addEventListener("change", function () {
+                field.dataset.touched = "true";
+                validateField(field);
+              });
+            });
+
+            form.addEventListener("submit", function (e) {
+              let firstInvalid = null;
+
+              fields.forEach(function (field) {
+                field.dataset.touched = "true";
+                if (!validateField(field) && !firstInvalid) {
+                  firstInvalid = field;
+                }
+              });
+
+              if (firstInvalid) {
+                e.preventDefault();
+                firstInvalid.focus();
+                return;
+              }
+
+              // Prevent double submit
+              submitBtn.disabled = true;
+              submitBtn.textContent = "Sending...";
+            });
+          });
+      })();
     </script>
   </body>
 </html>

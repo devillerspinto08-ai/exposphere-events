@@ -1589,6 +1589,21 @@
           padding: 0.85rem 1rem;
         }
       }
+      .error-msg {
+        display: block;
+        min-height: 18px;
+        margin-top: 4px;
+        font-size: 12px;
+        color: #e53935;
+      }
+      .form-input.is-invalid,
+      .form-textarea.is-invalid {
+        border-color: #e53935 !important;
+      }
+      .form-input.is-valid,
+      .form-textarea.is-valid {
+        border-color: #2e7d32 !important;
+      }
     </style>
   </head>
   <body>
@@ -2376,9 +2391,10 @@
               id="contactForm"
               name="contact"
               method="POST"
-              action="./apnaGhar/thankyou.html"
+              action="/thankyou.html"
               data-netlify="true"
               netlify-honeypot="bot-field"
+              novalidate
             >
               <input type="hidden" name="form-name" value="contact" />
               <input
@@ -2391,72 +2407,128 @@
                 name="enquiry_type"
                 value="General Portal Enquiry"
               />
+
               <p hidden>
                 <label>Don't fill this out: <input name="bot-field" /></label>
               </p>
+
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label">Full Name</label>
+                  <label class="form-label" for="name">Full Name</label>
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     class="form-input"
                     placeholder="Your name"
                     required
+                    minlength="2"
+                    maxlength="80"
+                    pattern=".*\S.*"
+                    data-label="your name"
+                    autocomplete="name"
                   />
+                  <small class="error-msg" aria-live="polite"></small>
                 </div>
+
                 <div class="form-group">
-                  <label class="form-label">Company Name</label>
+                  <label class="form-label" for="company">Company Name</label>
                   <input
                     type="text"
+                    id="company"
                     name="company"
                     class="form-input"
                     placeholder="Your company"
+                    maxlength="100"
+                    autocomplete="organization"
                   />
+                  <small class="error-msg" aria-live="polite"></small>
                 </div>
               </div>
+
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label">Email</label>
+                  <label class="form-label" for="email">Email</label>
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     class="form-input"
                     placeholder="your@email.com"
                     required
+                    maxlength="100"
+                    pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}"
+                    data-label="your email"
+                    data-msg="Please enter a valid email, like name@example.com"
+                    autocomplete="email"
                   />
+                  <small class="error-msg" aria-live="polite"></small>
                 </div>
+
                 <div class="form-group">
-                  <label class="form-label">Phone Number</label>
+                  <label class="form-label" for="phone">Phone Number</label>
                   <input
                     type="tel"
+                    id="phone"
                     name="phone"
                     class="form-input"
                     placeholder="+91 XXXXX XXXXX"
+                    maxlength="15"
+                    pattern="(\+91[\s\-]?)?[6-9][0-9]{9}"
+                    data-msg="Please enter a valid 10-digit mobile number"
+                    autocomplete="tel"
                   />
+                  <small class="error-msg" aria-live="polite"></small>
                 </div>
               </div>
+
               <div class="form-group full">
-                <label class="form-label">Event Requirement</label>
-                <select class="form-select form-input" name="service">
-                  <option value="">Select your interest</option>
-                  <option>Exhibition / Trade Show</option>
-                  <option>Realty Expo</option>
-                  <option>Corporate Event</option>
-                  <option>Concert / Entertainment</option>
-                  <option>Sponsorship Opportunity</option>
-                  <option>Partnership / Investment</option>
-                  <option>Other</option>
+                <label class="form-label" for="service"
+                  >Event Requirement</label
+                >
+                <select
+                  class="form-select form-input"
+                  id="service"
+                  name="service"
+                  required
+                  data-msg="Please select an option"
+                >
+                  <option value="" disabled selected>
+                    Select your interest
+                  </option>
+                  <option value="Exhibition / Trade Show">
+                    Exhibition / Trade Show
+                  </option>
+                  <option value="Realty Expo">Realty Expo</option>
+                  <option value="Corporate Event">Corporate Event</option>
+                  <option value="Concert / Entertainment">
+                    Concert / Entertainment
+                  </option>
+                  <option value="Sponsorship Opportunity">
+                    Sponsorship Opportunity
+                  </option>
+                  <option value="Partnership / Investment">
+                    Partnership / Investment
+                  </option>
+                  <option value="Other">Other</option>
                 </select>
+                <small class="error-msg" aria-live="polite"></small>
               </div>
+
               <div class="form-group full">
-                <label class="form-label">Message</label>
+                <label class="form-label" for="message">Message</label>
                 <textarea
                   class="form-textarea"
+                  id="message"
                   name="message"
                   placeholder="Tell us about your requirements..."
+                  maxlength="1000"
+                  rows="5"
+                  data-label="your message"
                 ></textarea>
+                <small class="error-msg" aria-live="polite"></small>
               </div>
+
               <button type="submit" class="btn btn-primary form-submit">
                 Send Enquiry
                 <svg
@@ -2533,7 +2605,9 @@
               class="footer-newsletter-form"
               name="newsletter"
               method="POST"
+              action="/thankyou.html"
               data-netlify="true"
+              netlify-honeypot="bot-field"
             >
               <input type="hidden" name="form-name" value="newsletter" />
               <input
@@ -2541,12 +2615,22 @@
                 name="subject"
                 value="[ExpoSphere Website] New Newsletter Subscription"
               />
+              <p hidden>
+                <label>Don't fill this out: <input name="bot-field" /></label>
+              </p>
+
               <input
                 type="email"
+                id="newsletter-email"
                 name="email"
                 class="footer-newsletter-input"
                 placeholder="Your email address"
                 required
+                maxlength="100"
+                pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}"
+                title="Please enter a valid email, like name@example.com"
+                autocomplete="email"
+                aria-label="Email address"
               />
               <button type="submit" class="footer-newsletter-btn">Join</button>
             </form>
@@ -3247,6 +3331,99 @@
           closeUpcomingModal();
         }
       });
+      (function () {
+        const form = document.getElementById("contactForm");
+        const fields = form.querySelectorAll(".form-input, .form-textarea");
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        function getMessage(field) {
+          const v = field.validity;
+          const label = field.dataset.label || "this field";
+
+          if (v.valueMissing) {
+            return field.dataset.msg || "Please enter " + label;
+          }
+          if (v.tooShort) {
+            return "Please enter at least " + field.minLength + " characters";
+          }
+          if (v.tooLong) {
+            return "Maximum " + field.maxLength + " characters allowed";
+          }
+          if (v.typeMismatch || v.patternMismatch) {
+            if (field.dataset.msg) return field.dataset.msg;
+            return "Please enter " + label;
+          }
+          return "";
+        }
+
+        function validateField(field) {
+          const errorEl = field
+            .closest(".form-group")
+            .querySelector(".error-msg");
+          const empty = field.value.trim() === "" && !field.required;
+
+          // Optional and empty: no error, no colour
+          if (empty) {
+            errorEl.textContent = "";
+            field.classList.remove("is-invalid", "is-valid");
+            return true;
+          }
+
+          if (field.checkValidity()) {
+            errorEl.textContent = "";
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid");
+            return true;
+          }
+
+          errorEl.textContent = getMessage(field);
+          field.classList.remove("is-valid");
+          field.classList.add("is-invalid");
+          return false;
+        }
+
+        fields.forEach(function (field) {
+          // Start showing errors only after the user has touched the field
+          field.addEventListener("blur", function () {
+            field.dataset.touched = "true";
+            validateField(field);
+          });
+
+          // Live validation while typing
+          field.addEventListener("input", function () {
+            if (field.dataset.touched === "true" || field.value.length > 0) {
+              validateField(field);
+            }
+          });
+
+          // Dropdown
+          field.addEventListener("change", function () {
+            field.dataset.touched = "true";
+            validateField(field);
+          });
+        });
+
+        form.addEventListener("submit", function (e) {
+          let firstInvalid = null;
+
+          fields.forEach(function (field) {
+            field.dataset.touched = "true";
+            if (!validateField(field) && !firstInvalid) {
+              firstInvalid = field;
+            }
+          });
+
+          if (firstInvalid) {
+            e.preventDefault();
+            firstInvalid.focus();
+            return;
+          }
+
+          // Prevent double submit
+          submitBtn.disabled = true;
+          submitBtn.firstChild.textContent = "Sending... ";
+        });
+      })();
     </script>
   </body>
 </html>
